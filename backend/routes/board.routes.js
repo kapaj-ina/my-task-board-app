@@ -15,7 +15,6 @@ router.post("/", async (req, res) => {
       { name: "Task in Progress", status: "In Progress", icon: "⏰", boardId: board._id },
       { name: "Task Completed", status: "Completed", icon: "🏆", boardId: board._id },
       { name: "Task Won't Do", status: "Won't do", icon: "☕", boardId: board._id },
-      { name: "Task To Do", status: "To Do", icon: "📋", boardId: board._id },
     ]);
 
     board.tasks = defaultTasks.map(task => task._id);

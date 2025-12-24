@@ -7,8 +7,8 @@ const taskSchema = new mongoose.Schema(
     icon: String,
     status: {
       type: String,
-      enum: ["To Do", "In Progress", "Completed", "Won't do"],
-      default: "To Do"
+      enum: ["In Progress", "Completed", "Won't do"],
+      default: "In Progress"
     },
     boardId: {
       type: mongoose.Schema.Types.ObjectId,

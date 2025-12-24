@@ -1,0 +1,153 @@
+.tasks-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "DM Sans", sans-serif;
+  background: #f9f9fb;
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+.board-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.board-header h1, .board-header input {
+  font-size: 28px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.board-name {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  font-weight: bold;
+  outline: none;
+  cursor: text;
+}
+
+.board-description {
+  font-size: 14px;
+  color: #555;
+  border: none;
+  background: transparent;
+  resize: none;
+  width: 100%;
+  outline: none;
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  justify-content: space-between;
+  transition: transform 0.2s;
+  cursor: pointer;
+  background: #fff;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.task-icon {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+}
+
+.task-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-name {
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-desc {
+  font-size: 14px;
+  color: #555;
+  margin-top: 3px;
+}
+
+.edit-icon {
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: #000;
+}
+
+.task-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-task-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  padding: 12px 15px;
+  background-color: #f7e07a;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-task-btn:hover {
+  background-color: #f5d94a;
+}
+
+.task-name input,
+.task-desc input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.task-desc input {
+  font-size: 14px;
+  font-weight: normal;
+  color: #555;
+}
