@@ -12,9 +12,10 @@ router.post("/", async (req, res) => {
     });
 
     const defaultTasks = await Task.insertMany([
-      { name: "Task in Progress", status: "In Progress", icon: "⏰", boardId: board._id },
-      { name: "Task Completed", status: "Completed", icon: "🏆", boardId: board._id },
-      { name: "Task Won't Do", status: "Won't do", icon: "☕", boardId: board._id },
+      { name: "Task in Progress", status: "In Progress", icon: "⏰", boardId: board._id, status_icon: "time_atack_duotone.svg" },
+      { name: "Task Completed", status: "Completed", icon: "🏋️‍♂️", boardId: board._id, status_icon: "done_round_duotone.svg" },
+      { name: "Task Won't Do", status: "Will Not Do", icon: "☕", boardId: board._id, status_icon: "close_ring_duotone.svg" },
+      { name: "Task To Do", description: "Work on a Challenge to present for the interview", icon: "📚", boardId: board._id },
     ]);
 
     board.tasks = defaultTasks.map(task => task._id);
