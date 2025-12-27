@@ -1,0 +1,191 @@
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+}
+
+.task-drawer {
+  width: 520px;
+  background: white;
+  padding: 8px 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.drawer-header h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.close-btn {
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.drawer-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 0 12px 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.form-group textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 2px solid #3b82f6;
+}
+
+.icon-picker {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-picker button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.icon-picker button.active {
+  background: #f5d565;
+}
+
+.status-picker {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
+}
+
+.status-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-check {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: #3b82f6;
+}
+
+.status-card.active {
+  border: 2px solid #3b82f6;
+}
+
+.status-card span {
+  font-size: 16px;
+}
+
+.status-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-card.in-progress .status-icon {
+  background: #e9a23b;
+}
+
+.status-card.completed .status-icon {
+  background: #32d657;
+}
+
+.status-card.wont-do .status-icon {
+  background: #dd524c;
+}
+
+.drawer-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.footer-btn {
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+}
+
+.save-btn {
+  background-color: #3b82f6;
+}
+
+.save-btn:hover { 
+  background: #2563eb; 
+}
+
+.delete-btn {
+  background-color: #9ca3af;
+}
+
+.delete-btn:hover { 
+  background: #6b7280; 
+}

@@ -1,8 +1,11 @@
+body {
+  font-family: "Outfit", sans-serif;
+}
+
 .board-container {
   padding: 50px 16px;
   max-width: 580px;
   margin: auto;
-  font-family: "Outfit", sans-serif;
 }
 
 .board-header {

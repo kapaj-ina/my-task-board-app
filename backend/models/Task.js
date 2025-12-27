@@ -7,17 +7,17 @@ const taskSchema = new mongoose.Schema(
     icon: String,
     status: {
       type: String,
-      enum: ["In Progress", "Completed", "Will Not Do", ""],
-      default: ""
+      enum: ["In Progress", "Completed", "Will Not Do"],
+      default: null
     },
     boardId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Board",
       required: true
     },
-    status_icon: {
+    statusIcon: {
       type: String,
-      default: ""
+      default: null
     },
   },
   { timestamps: true }

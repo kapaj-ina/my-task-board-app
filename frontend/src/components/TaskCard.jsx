@@ -1,6 +1,10 @@
 const TaskCard = ({ task, onClick }) => {
-  const hasStatus = task.status && task.status_icon;
-  const statusClass = `status-${task.status?.toLowerCase().replace(/\s/g, "-")}`;
+  const { name, description, icon, status, statusIcon } = task;
+
+  const hasStatus = status && statusIcon;
+  const getStatusClass = (status) =>
+    status ? `status-${status.toLowerCase().replace(/\s/g, "-")}` : "";
+  const statusClass = getStatusClass(status);
 
   return (
     <div
@@ -8,17 +12,15 @@ const TaskCard = ({ task, onClick }) => {
       onClick={() => onClick(task)}
     >
       <div className="task-left">
-        <div className="task-icon">
-          {task.icon}
-        </div>
+        <div className="task-icon">{icon}</div>
         <div className="task-text">
-          <h2>{task.name}</h2>
-          {task.description && <p>{task.description}</p>}
+          <h2>{name}</h2>
+          {description && <p>{description}</p>}
         </div>
       </div>
       {hasStatus && (
-        <div className={`task-status-icon status-icon-${task.status?.toLowerCase().replace(/\s/g, "-")}`}>
-          <img src={`/icons/${task.status_icon}`} alt={`${task.status} icon`} width={20} height={20} />
+        <div className={`task-status-icon ${getStatusClass(status)}`}>
+          <img src={`/icons/${statusIcon}`} alt={`${status} icon`} width={20} height={20} />
         </div>
       )}
     </div>
