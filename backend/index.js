@@ -9,7 +9,7 @@ import taskRoutes from "./routes/task.routes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin:"https://my-task-board-frontend.onrender.com"}));
 app.use(express.json());
 
 app.use("/api/boards", boardRoutes);
