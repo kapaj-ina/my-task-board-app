@@ -7,7 +7,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
   const [name, setName] = useState(task.name || "");
   const [description, setDescription] = useState(task.description || "");
   const [icon, setIcon] = useState(task.icon || "");
-  const [status, setStatus] = useState(task.status || "");
+  const [status, setStatus] = useState(task.status ?? null);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -15,7 +15,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
     if (!name.trim()) return;
     setSaving(true);
     try {
-      await saveTask({...task, name, description, icon, status});
+      await saveTask({...task, name, description, icon, status: status || null });
       onClose();
     } finally {
       setSaving(false);
