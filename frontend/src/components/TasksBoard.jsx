@@ -32,6 +32,7 @@ const TasksBoard = () => {
               className="board-title"
               value={board.name}
               onChange={(e) => updateBoardField("name", e.target.value)}
+              aria-label="Board Name"
             />
             <p className="board-subtitle">Tasks to keep organised</p>
           </div>

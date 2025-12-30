@@ -48,13 +48,31 @@ cd frontend
 npm install
 ```
 
-3. Start the frontend:
+3. Create a .env file with the following variable:
+
+```bash
+REACT_APP_API_URL=http://localhost:5001/api
+```
+Note: Update REACT_APP_API_URL to your live backend URL when deploying (e.g., https://my-task-board-app.onrender.com/api).
+
+4. Start the frontend:
 
 ```bash
 npm start
 ```
 
 The frontend runs on: http://localhost:3000.
+
+## Viewing a Board
+
+To view a specific board, navigate to:
+
+```bash
+http://localhost:3000/board/<boardId>
+```
+
+- Replace <boardId> with the ID of the board you want to view.
+- You can find board IDs from your database or API responses.
 
 
 ## Features
