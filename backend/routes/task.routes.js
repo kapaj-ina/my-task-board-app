@@ -18,7 +18,6 @@ router.post("/", async (req, res) => {
       description: "",
       icon: "",
       status: null,
-      statusIcon: null,
     });
 
     board.tasks.push(task._id);

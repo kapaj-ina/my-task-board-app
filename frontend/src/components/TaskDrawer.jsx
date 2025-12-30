@@ -15,7 +15,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
     if (!name.trim()) return;
     setSaving(true);
     try {
-      await saveTask({ ...task, name, description, icon, status });
+      await saveTask({...task, name, description, icon, status});
       onClose();
     } finally {
       setSaving(false);
@@ -65,6 +65,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
               {icons.map((i) => (
                 <button
                   key={i}
+                  type="button"
                   className={icon === i ? "active" : ""}
                   onClick={() => setIcon(i)}
                 >
@@ -76,20 +77,20 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
           <div className="form-group">
             <label>Status</label>
             <div className="status-picker">
-              {statuses.map(({ label, icon: statusIcon, value, color }) => (
+              {Object.entries(statuses).map(([key, { icon, color }]) => (
                 <button
-                  key={value}
+                  key={key}
                   type="button"
-                  className={`status-card ${color} ${status === value ? "active" : ""}`}
-                  onClick={() => setStatus(status === value ? "" : value)}
+                  className={`status-card ${color} ${status === key ? "active" : ""}`}
+                  onClick={() => setStatus(status === key ? "" : key)}
                 >
                   <div className="status-left">
                     <div className="status-icon">
-                      <img src={statusIcon} alt={label} />
+                      <img src={icon} alt={key} />
                     </div>
-                    <span>{label}</span>
+                    <span>{key}</span>
                   </div>
-                  {status === value && (
+                  {status === key && (
                     <div className="status-check">
                       <img src="/icons/done_round.svg" alt="Selected" width={15} height={15} />
                     </div>
@@ -104,9 +105,10 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
             type="button"
             className="footer-btn delete-btn"
             onClick={handleDelete}
-            disabled={deleting || saving}
+           disabled={deleting || saving}
           >
-            Delete <img src="/icons/trash.svg" alt="Delete" width={20} height={20} />
+            Delete
+            <img src="/icons/trash.svg" alt="Delete" width={20} height={20} />
           </button>
           <button
             type="button"
@@ -114,7 +116,8 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
             onClick={handleSave}
             disabled={saving || deleting}
           >
-            Save <img src="/icons/done_round.svg" alt="Save" width={20} height={20} />
+            Save
+            <img src="/icons/done_round.svg" alt="Save" width={20} height={20} />
           </button>
         </footer>
       </aside>

@@ -1,7 +1,19 @@
 export const icons = ["👨🏻‍💻", "💬", "☕", "🏋️‍♂️", "📚", "⏰"];
 
-export const statuses = [
-  { label: "In Progress", icon: "/icons/time_atack_duotone.svg", value: "In Progress", color: "in-progress" },
-  { label: "Completed", icon: "/icons/done_round_duotone.svg", value: "Completed", color: "completed" },
-  { label: "Won’t do", icon: "/icons/close_ring_duotone.svg", value: "Will Not Do", color: "wont-do" },
-];
+export const statuses = {
+  "In Progress": {
+    icon: "/icons/time_atack_duotone.svg",
+    color: "in-progress",
+    iconClass: "status-in-progress",
+  },
+  "Completed": {
+    icon: "/icons/done_round_duotone.svg",
+    color: "completed",
+    iconClass: "status-completed",
+  },
+  "Will Not Do": {
+    icon: "/icons/close_ring_duotone.svg",
+    color: "wont-do",
+    iconClass: "status-will-not-do",
+  },
+};

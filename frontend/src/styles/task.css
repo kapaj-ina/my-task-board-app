@@ -111,15 +111,15 @@ body {
   flex-shrink: 0;
 }
 
-.status-icon-in-progress {
+.status-in-progress-icon {
   background: #E9A23B;
 }
 
-.status-icon-completed {
+.status-completed-icon {
   background: #32D657;
 }
 
-.status-icon-will-not-do {
+.status-will-not-do-icon {
   background: #DD524C;
 }
 

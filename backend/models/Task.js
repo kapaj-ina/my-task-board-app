@@ -15,10 +15,6 @@ const taskSchema = new mongoose.Schema(
       ref: "Board",
       required: true
     },
-    statusIcon: {
-      type: String,
-      default: null
-    },
   },
   { timestamps: true }
 );
