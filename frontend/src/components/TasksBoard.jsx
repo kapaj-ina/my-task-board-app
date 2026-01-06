@@ -9,17 +9,20 @@ import TaskDrawer from "./TaskDrawer";
 
 const TasksBoard = () => {
   const { boardId } = useParams();
-  const { board, tasks, saveTask, deleteTask, loading, error, updateBoardField } = useBoard(boardId);
+  const { board, tasks, saveTask, deleteTask, error, updateBoardField } = useBoard(boardId);
   const [selectedTask, setSelectedTask] = useState(null);
-
-  const openTask = (task = null) => {
-    setSelectedTask(
-      task || { boardId, name: "", description: "", status: "", icon: "", isNew: true }
-    );
+  const [tooltip, setTooltip] = useState("");
+  const showTooltip = (message) => {
+    setTooltip(message);
+    setTimeout(() => setTooltip(""), 2000);
   };
+
+
+  const createEmptyTask = () => ({ boardId, name: "", description: "", status: "", icon: "", isNew: true });
+
+  const openTask = (task) => setSelectedTask(task ?? createEmptyTask());
   const closeDrawer = () => setSelectedTask(null);
 
-  if (loading) return <p>Loading board...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -39,15 +42,15 @@ const TasksBoard = () => {
         </header>
         <section>
           {tasks.map((task) => (
-            <TaskCard key={task._id} task={task} onClick={() => openTask(task)} />
+            <TaskCard key={task._id} task={task} onSelect={() => openTask(task)} />
           ))}
-        </section>
-        <div className="task-card task-card-add" onClick={() => openTask()}>
-          <div className="add-icon">
-            <img src="/icons/add_round_duotone.svg" alt="Add icon" width={25} height={25} />
+          <div className="task-card task-card-add" onClick={() => openTask(createEmptyTask())}>
+            <div className="add-icon">
+              <img src="/icons/add_round_duotone.svg" alt="Add icon" width={25} height={25} />
+            </div>
+            <h3>Add new task</h3>
           </div>
-          <h3>Add new task</h3>
-        </div>
+        </section>
       </main>
       {selectedTask && (
         <TaskDrawer
@@ -55,8 +58,10 @@ const TasksBoard = () => {
           onClose={closeDrawer}
           saveTask={saveTask}
           deleteTask={deleteTask}
-        />
+          showTooltip={showTooltip}
+        />      
       )}
+      {tooltip && <div className="drawer-tooltip">{tooltip}</div>}
     </>
   );
 };

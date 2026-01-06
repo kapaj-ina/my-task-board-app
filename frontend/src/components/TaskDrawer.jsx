@@ -1,35 +1,48 @@
 import { useState } from "react";
+
 import "../styles/taskDrawer.css";
 
+import { useTaskForm } from "../hooks/useTaskForm";
 import { icons, statuses } from "../data/taskData";
 
-const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
-  const [name, setName] = useState(task.name || "");
-  const [description, setDescription] = useState(task.description || "");
-  const [icon, setIcon] = useState(task.icon || "");
-  const [status, setStatus] = useState(task.status ?? null);
-  const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState(false);
+const TaskDrawer = ({ task, onClose, saveTask, deleteTask, showTooltip }) => {
+  const { values, errors, updateField, validate } = useTaskForm(task);
+  const [loading, setLoading] = useState({ save: false, delete: false });
 
   const handleSave = async () => {
-    if (!name.trim()) return;
-    setSaving(true);
+    const data = validate();
+    if (!data) return;
+
+    setLoading((prev) => ({ ...prev, save: true }));
     try {
-      await saveTask({...task, name, description, icon, status: status || null });
+      const taskToSave = { 
+        ...task, 
+        ...data,
+        status: data.status === "" ? null : data.status 
+      };
+      await saveTask(taskToSave);
+
+      showTooltip("Task was saved successfully!");
       onClose();
+    } catch {
+      showTooltip("Failed to save task");
     } finally {
-      setSaving(false);
+      setLoading((prev) => ({ ...prev, save: false }));
     }
   };
 
   const handleDelete = async () => {
-    if (!task._id || !deleteTask) return;
-    setDeleting(true);
+    if (!task._id) return;
+    setLoading((prev) => ({ ...prev, delete: true }));
     try {
       await deleteTask(task._id);
+
+      showTooltip("Task was deleted successfully!");
       onClose();
+    } catch {
+      showTooltip("Failed to delete task");
     } finally {
-      setDeleting(false);
+      setLoading((prev) => ({ ...prev, delete: false }));
     }
   };
 
@@ -37,7 +50,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
     <div className="drawer-overlay" onClick={onClose}>
       <aside className="task-drawer" onClick={(e) => e.stopPropagation()}>
         <header className="drawer-header">
-          <h2>Task details</h2>
+          <h2>Task Details</h2>
           <button className="close-btn" onClick={onClose}>
             <img src="/icons/close_ring_duotone-1.svg" alt="Close" width={20} height={20} />
           </button>
@@ -46,18 +59,20 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
           <div className="form-group">
             <label>Task Name</label>
             <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={values.name}
+              onChange={(e) => updateField("name", e.target.value)}
               placeholder="Enter a task name"
             />
+            {errors.name && <p className="field-error">{errors.name}</p>}
           </div>
           <div className="form-group">
             <label>Description</label>
             <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={values.description}
+              onChange={(e) => updateField("description", e.target.value)}
               placeholder="Enter a short description"
             />
+            {errors.description && <p className="field-error">{errors.description}</p>}
           </div>
           <div className="form-group">
             <label>Icon</label>
@@ -66,8 +81,8 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
                 <button
                   key={i}
                   type="button"
-                  className={icon === i ? "active" : ""}
-                  onClick={() => setIcon(i)}
+                  className={values.icon === i ? "active" : ""}
+                  onClick={() => updateField("icon", i)}
                 >
                   {i}
                 </button>
@@ -81,8 +96,8 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
                 <button
                   key={key}
                   type="button"
-                  className={`status-card ${color} ${status === key ? "active" : ""}`}
-                  onClick={() => setStatus(status === key ? "" : key)}
+                  className={`status-card ${color} ${values.status === key ? "active" : ""}`}
+                  onClick={() => updateField("status", values.status === key ? "" : key)}
                 >
                   <div className="status-left">
                     <div className="status-icon">
@@ -90,7 +105,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
                     </div>
                     <span>{key}</span>
                   </div>
-                  {status === key && (
+                  {values.status === key && (
                     <div className="status-check">
                       <img src="/icons/done_round.svg" alt="Selected" width={15} height={15} />
                     </div>
@@ -102,19 +117,17 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask }) => {
         </div>
         <footer className="drawer-footer">
           <button
-            type="button"
             className="footer-btn delete-btn"
             onClick={handleDelete}
-           disabled={deleting || saving}
+            disabled={loading.save || loading.delete}
           >
             Delete
             <img src="/icons/trash.svg" alt="Delete" width={20} height={20} />
           </button>
           <button
-            type="button"
             className="footer-btn save-btn"
             onClick={handleSave}
-            disabled={saving || deleting}
+            disabled={loading.save || loading.delete}
           >
             Save
             <img src="/icons/done_round.svg" alt="Save" width={20} height={20} />

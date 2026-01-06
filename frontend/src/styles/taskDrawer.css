@@ -188,3 +188,22 @@
 .delete-btn:hover { 
   background: #6b7280; 
 }
+
+.drawer-tooltip {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  max-width: 260px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid #2563eb;
+  background-color: white;
+  animation: fadeInUp 0.2s ease;
+  z-index: 1100;
+}
+
+.field-error {
+  color: #dc2626;
+}

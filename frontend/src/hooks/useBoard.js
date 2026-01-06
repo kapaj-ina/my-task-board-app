@@ -6,7 +6,6 @@ const API = process.env.REACT_APP_API_URL;
 export const useBoard = (boardId) => {
   const [board, setBoard] = useState({ name: "", description: "" });
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const handleError = (err, fallback) => {
@@ -16,15 +15,12 @@ export const useBoard = (boardId) => {
   useEffect(() => {
     if (!boardId) return;
     (async () => {
-      setLoading(true);
       try {
         const { data } = await axios.get(`${API}/boards/${boardId}`);
         setBoard({ name: data.name, description: data.description });
         setTasks(data.tasks || []);
       } catch (err) {
         handleError(err, "Failed to fetch board");
-      } finally {
-        setLoading(false);
       }
     })();
   }, [boardId]);
@@ -45,12 +41,15 @@ export const useBoard = (boardId) => {
         : await axios.put(`${API}/tasks/${taskData._id}`, taskData);
 
       setTasks((prev) =>
-        taskData.isNew ? [...prev, data] : prev.map((t) => (t._id === data._id ? data : t))
+        taskData.isNew
+          ? [...prev, data]
+          : prev.map((t) => (t._id === data._id ? data : t))
       );
 
       return data;
     } catch (err) {
       handleError(err, "Failed to save task");
+      throw err;
     }
   };
 
@@ -60,13 +59,13 @@ export const useBoard = (boardId) => {
       setTasks((prev) => prev.filter((t) => t._id !== taskId));
     } catch (err) {
       handleError(err, "Failed to delete task");
+      throw err;
     }
   };
 
   return {
     board,
     tasks,
-    loading,
     error,
     updateBoardField,
     deleteTask,

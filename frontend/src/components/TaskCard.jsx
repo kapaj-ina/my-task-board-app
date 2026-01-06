@@ -1,13 +1,13 @@
 import { statuses } from "../data/taskData";
 
-const TaskCard = ({ task, onClick }) => {
+const TaskCard = ({ task, onSelect }) => {
   const { name, description, icon, status } = task;
-  const statusConfig = status ? statuses[status] : null;
+  const statusConfig = statuses[status];
 
   return (
     <div
       className={`task-card task-card-status ${statusConfig?.iconClass || ""}`}
-      onClick={() => onClick(task)}
+      onClick={onSelect}
     >
       <div className="task-left">
         <div className="task-icon">{icon}</div>
@@ -16,7 +16,7 @@ const TaskCard = ({ task, onClick }) => {
           {description && <p>{description}</p>}
         </div>
       </div>
-      {statusConfig && (
+      {statusConfig?.icon && (
         <div className={`task-status-icon ${statusConfig?.iconClass}-icon`}>
           <img
             src={statusConfig.icon}
