@@ -201,7 +201,6 @@
   border: 1px solid #2563eb;
   background-color: white;
   animation: fadeInUp 0.2s ease;
-  z-index: 1100;
 }
 
 .field-error {

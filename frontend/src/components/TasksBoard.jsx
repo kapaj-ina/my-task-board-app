@@ -17,7 +17,6 @@ const TasksBoard = () => {
     setTimeout(() => setTooltip(""), 2000);
   };
 
-
   const createEmptyTask = () => ({ boardId, name: "", description: "", status: "", icon: "", isNew: true });
 
   const openTask = (task) => setSelectedTask(task ?? createEmptyTask());

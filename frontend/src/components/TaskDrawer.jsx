@@ -17,8 +17,7 @@ const TaskDrawer = ({ task, onClose, saveTask, deleteTask, showTooltip }) => {
     try {
       const taskToSave = { 
         ...task, 
-        ...data,
-        status: data.status === "" ? null : data.status 
+        ...data
       };
       await saveTask(taskToSave);
 

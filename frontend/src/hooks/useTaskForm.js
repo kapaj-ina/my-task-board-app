@@ -3,10 +3,10 @@ import { taskSchema } from "../validation/taskSchema";
 
 export const useTaskForm = (task) => {
   const [values, setValues] = useState({
-    name: task.name ?? "",
+    name: task.name || "",
     description: task.description ?? "",
     icon: task.icon ?? "",
-    status: task.status ?? null,
+    status: task.status ?? "",
   });
 
   const [errors, setErrors] = useState({});
@@ -14,7 +14,11 @@ export const useTaskForm = (task) => {
   const updateField = (field, value) => {
     setValues((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
     }
   };
 

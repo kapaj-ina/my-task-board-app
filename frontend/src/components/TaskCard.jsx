@@ -10,13 +10,15 @@ const TaskCard = ({ task, onSelect }) => {
       onClick={onSelect}
     >
       <div className="task-left">
-        <div className="task-icon">{icon}</div>
+        <div className="task-icon">
+          {icon || "📋"}
+        </div>
         <div className="task-text">
           <h2>{name}</h2>
           {description && <p>{description}</p>}
         </div>
       </div>
-      {statusConfig?.icon && (
+      {statusConfig && (
         <div className={`task-status-icon ${statusConfig?.iconClass}-icon`}>
           <img
             src={statusConfig.icon}

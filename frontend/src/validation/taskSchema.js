@@ -9,7 +9,14 @@ export const taskSchema = z.object({
   description: z
     .string()
     .max(500, "Description must be under 500 characters")
+    .transform((value) => (value === "" ? null : value))
     .optional(),
-  icon: z.string().optional(),
-  status: z.string().optional(),
+  icon: z
+    .string()
+    .transform((value) => (value === "" ? null : value))
+    .optional(),
+  status: z
+    .string()
+    .transform((value) => (value === "" ? null : value))
+    .optional(),
 });
