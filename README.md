@@ -2,6 +2,13 @@
 
 ---
 
+"My Task Board" is a task management application that allows users to create, update and delete tasks. Each task can have a name, description, icon and status. The project demonstrates the use of React, Node.js + Express and MongoDB.
+
+![alt text](taskBoard.pdf)
+
+![alt text](taskDrawer.pdf)
+
+
 ## 🛠️ Installation
 
 ### Backend
